@@ -1,0 +1,124 @@
+<style>
+	body{
+		background-color: #272727;
+		color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	div{
+		width: 250;
+		text-align: center;
+	}
+
+	span{
+		width: 45;
+		height: 45;
+		background-color: #202020;
+		/*float: left;*/
+		display: inline-block;
+		margin: 5;
+	}
+
+	.orange{background-color: orangered;}
+
+	button{
+		background-color: transparent;
+		border: 1px solid grey;
+		color: grey;
+		position: fixed;
+		top: 10;
+		left: 10;
+		outline: none;
+		text-transform: uppercase;
+		padding: 5;
+		font-family: monospace;
+	}
+
+</style>
+
+<div id="blocao"></div>
+
+<button id="bt">troca</button>
+
+<script>
+
+	function cria(a,b){
+
+		t = ""
+
+		if(arguments.length == 1)
+			quant = 4
+		else
+			quant = prompt("quantidade de 0 a 10")
+
+		blocao.style.width = 45*quant+10*quant
+
+		for(i=0;i<quant**2;i++){
+			t+="<span x='"+i%quant+"' y='"+parseInt(i/quant)+"'></span>"
+		}
+
+		blocao.innerHTML = t
+
+	// parte 2
+	spans = document.getElementsByTagName("span")
+
+	for(i in spans){
+		try{
+			spans[i].onclick=function(i){
+
+				x = parseInt(spans[i].getAttribute("x"))
+				y = parseInt(spans[i].getAttribute("y"))
+
+				// console.log(spans[i])
+
+				
+				muda( x , y , quant)
+				muda( x+1 , y , quant)
+				muda( x-1 , y , quant)
+
+				muda( x , y+1 , quant)
+				muda( x , y-1 , quant)
+
+				muda( x+1 , y+1 , quant)
+				muda( x-1 , y+1 , quant)
+
+				muda( x-1 , y-1 , quant)
+				muda( x+1 , y-1 , quant)
+
+			}.bind(null,i)
+
+		}catch(e){}
+	}
+
+	for(i=0;i<quant**2;i++){
+		k = parseInt(Math.random()*10)
+		if(k%2 == 0)
+			spans[i].click()
+	}
+
+	function muda(x,y,q){	
+
+		x = parseInt(x)
+		y = parseInt(y)
+
+		if(x<q && x>=0 && y >= 0 && y<q)
+			spans[y*q+x].classList.toggle('orange')
+	}
+
+	bt.onclick=function(e){
+		cria(0,0)
+	}
+}
+
+cria(4)
+
+
+
+
+
+
+
+
+</script>
