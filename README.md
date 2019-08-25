@@ -1,1 +1,1 @@
-# https://hatatori.github.io/formatcodelive.github.io/
+# https://hatatori.github.io/gamelight.github.io/
